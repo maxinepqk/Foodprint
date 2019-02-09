@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> items;
     ArrayAdapter<String> itemsAdapter;
     ListView lvItems;
+    Button btnAddItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                 response = "THERE WAS AN ERROR";
             }
             Log.i("INFO", response);
-            //ListView.(response);
+            btnAddItem.setText("TESTING");
         }
     }
 
