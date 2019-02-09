@@ -54,7 +54,6 @@ public class CVFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startCameraSource();
         createCameraSource();
 
     }
@@ -109,6 +108,11 @@ public class CVFragment extends Fragment {
         }
         if (mCameraSource != null) {
             //mPreview.startViewTransition(getView());
+            Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+            startActivity(intent);
+        }
+        else {
+            //onDestroy();
         }
     }
 
