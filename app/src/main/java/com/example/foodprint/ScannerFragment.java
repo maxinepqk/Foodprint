@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +57,7 @@ public class ScannerFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+
     public void onActivityResult(int requestCode,int resultCode,Intent intent) {
         IntentResult scanResult =
                 IntentIntegrator.parseActivityResult(requestCode,resultCode,intent);
@@ -70,8 +70,6 @@ public class ScannerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_scanner, container, false);
-        Log.d("calling", "onCreateView in ScannerFragment");
-
         return rootView;
     }
 

@@ -94,7 +94,6 @@ public class ListFragment extends Fragment {
 
     }
 
-
     private void setupListViewListener() {
         // set the ListView's itemLongClickListener
         lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
