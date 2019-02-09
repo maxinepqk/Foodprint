@@ -26,7 +26,7 @@ public class ScannerFragment extends Fragment {
     public static final String ARG_PAGE = "ARG_PAGE";
 
     public static String codeContent;
-    public String codeFormat;
+    public static String codeFormat;
 
     private OnFragmentInteractionListener mListener;
 
@@ -58,12 +58,12 @@ public class ScannerFragment extends Fragment {
     }
 
 
-    public void onActivityResult(int requestCode,int resultCode,Intent intent) {
+    public void  onActivityResult(int requestCode,int resultCode,Intent intent) {
         IntentResult scanResult =
                 IntentIntegrator.parseActivityResult(requestCode,resultCode,intent);
         codeContent = scanResult.getContents();
         codeFormat = scanResult.getFormatName();
-        return codeContent;
+
     }
 
     @Override

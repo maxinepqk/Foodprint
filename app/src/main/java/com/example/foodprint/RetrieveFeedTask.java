@@ -66,7 +66,7 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
     }
 //    @Override
     protected String doInBackground(Void... urls) {
-        String barcode = ScannerFragment.codeContent; //put the the barcode ID here
+        String barcode = ScannerFragment.codeFormat; //put the the barcode ID here
 //        Log.d("", barcode);
         // Do some validation here <== idk tf this means it came with the tutorial
 
