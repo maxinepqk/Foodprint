@@ -6,8 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 public class SampleFragmentPagerAdapter extends FragmentPagerAdapter {
-    final int PAGE_COUNT = 3;
-    private String tabTitles[] = new String[] { "calendar", "scanner", "list" };
+    final int PAGE_COUNT = 4;
+    private String tabTitles[] = new String[] { "calendar", "scanner", "camera", "list" };
     private Context context;
 
     public SampleFragmentPagerAdapter(FragmentManager fm, Context context) {
@@ -24,7 +24,8 @@ public class SampleFragmentPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         if (position == 0) return CalendarFragment.newInstance(position);
         else if (position == 1) return ScannerFragment.newInstance(position);
-        else return ListFragment.newInstance(2);
+        else if (position == 2) return CVFragment.newInstance(position);
+        else return ListFragment.newInstance(position);
     }
 
     @Override
