@@ -19,6 +19,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,7 +55,6 @@ public class CVFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         createCameraSource();
 
     }
@@ -86,12 +86,12 @@ public class CVFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        startCameraSource();
     }
 
     @Override
     public void onPause() {
         super.onPause();
+
     }
 
     @Override
@@ -102,7 +102,8 @@ public class CVFragment extends Fragment {
         }
     }
 
-    private void startCameraSource() {
+    private void startCameraSource(LayoutInflater inflater, ViewGroup container,
+                                   Bundle savedInstanceState) {
         int code = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(getContext());
         if (code != ConnectionResult.SUCCESS) {
             onDestroy();
@@ -110,11 +111,10 @@ public class CVFragment extends Fragment {
         if (mCameraSource != null) {
             //mPreview.startViewTransition(getView());
 
-            Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-            startActivity(intent);
+
         }
         else {
-            //onDestroy();
+            onDestroy();
         }
     }
 
@@ -143,7 +143,17 @@ public class CVFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         //mPreview = getView().findViewById(R.id.preview);
-        return inflater.inflate(R.layout.fragment_cv, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_cv, container, false);
+        Button b = (Button)rootView.findViewById(R.id.cv_button);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+                startActivity(intent);
+            }
+        });
+        startCameraSource(inflater,container,savedInstanceState);
+        return rootView;
     }
 
 //    // TODO: Rename method, update argument and hook method into UI event
