@@ -14,6 +14,9 @@ import com.google.gson.Gson;
 
 class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
 
+    public static String barcode;
+    public static String productName;
+
     //copied from here from barcodelookup.com api documentation
     public class Product
     {
@@ -142,13 +145,13 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
         Gson g = new Gson();
         RootObject value = g.fromJson(response, RootObject.class);
 //
-        String barcode = value.products[0].barcode_number;
+        barcode = value.products[0].barcode_number;
 //        System.out.print("Barcode Number: ");
 //        Log.d("barcode", barcode);
 
-        String name = value.products[0].product_name;
+        productName = value.products[0].product_name;
 //        System.out.print("Product Name: ");
-//        Log.d("name", name);
+//        Log.d("productName", productName);
 
 //        System.out.println("Entire Response:");
 //        Log.d("response",response);
