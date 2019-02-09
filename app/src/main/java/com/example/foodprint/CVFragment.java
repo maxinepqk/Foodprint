@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -50,7 +51,8 @@ public class CVFragment extends Fragment {
     public static final String TAG = "PhotoViewerActivity";
 
     private CameraSource mCameraSource = null;
-    //private CameraPreview mPreview;
+    private ImageView mPreview;
+    private Bitmap mBitmap;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -142,15 +144,29 @@ public class CVFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        //mPreview = getView().findViewById(R.id.preview);
         View rootView = inflater.inflate(R.layout.fragment_cv, container, false);
         Button b = (Button)rootView.findViewById(R.id.cv_button);
+        Bitmap bitmap;
+        mPreview = (ImageView) rootView.findViewById(R.id.preview);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
                 startActivity(intent);
+                Bundle extras = intent.getExtras();
+                Log.d("enter","enteredBITCH");
+                if (intent.hasExtra("data")) {
+                    Log.d("asdf","fuckfFKCUFKFUCKU");
+                    Bitmap bitmap = (Bitmap) extras.get("data");
+
+                    if (bitmap != null) {
+                        mPreview.setImageBitmap(bitmap);
+                        Log.d("asdfjl;","oops");
+                    }
+                }
+
             }
+
         });
         startCameraSource(inflater,container,savedInstanceState);
         return rootView;
