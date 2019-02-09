@@ -151,7 +151,7 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
 
         productName = value.products[0].product_name;
 //        System.out.print("Product Name: ");
-//        Log.d("productName", productName);
+        Log.d("productName", productName);
 
 //        System.out.println("Entire Response:");
 //        Log.d("response",response);
