@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -62,7 +63,6 @@ public class ListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mPage = getArguments().getInt(ARG_PAGE);
     }
 
@@ -89,10 +89,29 @@ public class ListFragment extends Fragment {
         // setup the listener on creation
         setupListViewListener();
 
+        // button listener
+        Button b = (Button) rootView.findViewById(R.id.btnAddItem);
+        b.setOnClickListener(mButtonClickListener);
+
         return rootView;
 
 
     }
+
+    private View.OnClickListener mButtonClickListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            // obtain a reference to the EditText created with the layout
+            EditText etNewItem = (EditText) getActivity().findViewById(R.id.etNewItem);
+            // grab the EditText's content as a String
+            String itemText = etNewItem.getText().toString();
+            // add the item to the list via the adapter
+            itemsAdapter.add(itemText);
+            // clear the EditText by setting it to an empty String
+            etNewItem.setText("");
+            // display a notification to the user
+            Toast.makeText(getActivity().getApplicationContext(), "Item added to list", Toast.LENGTH_SHORT).show();
+        }
+    };
 
     private void setupListViewListener() {
         // set the ListView's itemLongClickListener
@@ -109,19 +128,19 @@ public class ListFragment extends Fragment {
         });
     }
 
-    public void onAddItem(View v) {
-        // obtain a reference to the EditText created with the layout
-        EditText etNewItem = (EditText) getActivity().findViewById(R.id.etNewItem);
-        // grab the EditText's content as a String
-        String itemText = etNewItem.getText().toString();
-        // add the item to the list via the adapter
-        itemsAdapter.add(itemText);
-        // clear the EditText by setting it to an empty String
-        etNewItem.setText("");
-        // display a notification to the user
-        Toast.makeText(getActivity().getApplicationContext(), "Item added to list", Toast.LENGTH_SHORT).show();
-
-    }
+//    public void onAddItem(View v) {
+//        // obtain a reference to the EditText created with the layout
+//        EditText etNewItem = (EditText) getActivity().findViewById(R.id.etNewItem);
+//        // grab the EditText's content as a String
+//        String itemText = etNewItem.getText().toString();
+//        // add the item to the list via the adapter
+//        itemsAdapter.add(itemText);
+//        // clear the EditText by setting it to an empty String
+//        etNewItem.setText("");
+//        // display a notification to the user
+//        Toast.makeText(getActivity().getApplicationContext(), "Item added to list", Toast.LENGTH_SHORT).show();
+//
+//    }
 
 //    // TODO: Rename method, update argument and hook method into UI event
 //    public void onButtonPressed(Uri uri) {
