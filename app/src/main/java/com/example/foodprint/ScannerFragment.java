@@ -77,6 +77,10 @@ public class ScannerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_scanner, container, false);
+
+        //call this whenever scanner is created, barcode API call
+        RetrieveFeedTask barcodeLookup = new RetrieveFeedTask();
+        barcodeLookup.execute();
         return rootView;
     }
 
