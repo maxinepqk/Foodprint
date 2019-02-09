@@ -27,9 +27,8 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
 
-//        RetrieveFeedTask testing = new RetrieveFeedTask();
-//        testing.execute();
-//    new RetrieveFeedTask("").execute();
+        RetrieveFeedTask testing = new RetrieveFeedTask();
+        testing.execute();
     }
 
     @Override

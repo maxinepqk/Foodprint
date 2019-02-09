@@ -101,19 +101,19 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
         Log.i("INFO", response);
         // modified from barcodelookup api docs
         // use GSON to read JSON file
-        Gson g = new Gson();
-        RootObject value = g.fromJson(response, RootObject.class);
-
-        String barcode = value.products[0].barcode_number;
-        System.out.print("Barcode Number: ");
-        System.out.println(barcode);
-
-        String name = value.products[0].product_name;
-        System.out.print("Product Name: ");
-        System.out.println(name);
-
-        System.out.println("Entire Response:");
-        System.out.println(response);
+//        Gson g = new Gson();
+//        RootObject value = g.fromJson(response, RootObject.class);
+//
+//        String barcode = value.products[0].barcode_number;
+//        System.out.print("Barcode Number: ");
+//        Log.d("barcode", barcode);
+//
+//        String name = value.products[0].product_name;
+//        System.out.print("Product Name: ");
+//        Log.d("name", name);
+//
+//        System.out.println("Entire Response:");
+        Log.d("response",response);
         //end of copied code
         //make it actually do stuff instead
     }
