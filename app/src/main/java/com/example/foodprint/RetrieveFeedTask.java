@@ -2,7 +2,6 @@ package com.example.foodprint;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -11,7 +10,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 //need this to add gson
-import com.google.gson.Gson;
 
 class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
 
@@ -143,8 +141,8 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
         Log.i("INFO", response);
         // modified from barcodelookup api docs
         // use GSON to read JSON file
-        Gson g = new Gson();
-        RootObject value = g.fromJson(response, RootObject.class);
+//        Gson g = new Gson();
+//        RootObject value = g.fromJson(response, RootObject.class);
 
 
 //        barcode = value.products[0].barcode_number;

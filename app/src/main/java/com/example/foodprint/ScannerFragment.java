@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -33,6 +34,7 @@ public class ScannerFragment extends Fragment {
 
     public static String codeContent;
     public static String codeFormat;
+    private String productName;
 
     private OnFragmentInteractionListener mListener;
 
@@ -99,8 +101,14 @@ public class ScannerFragment extends Fragment {
         RetrieveFeedTask barcodeLookup = new RetrieveFeedTask();
         barcodeLookup.execute();
         //now try to store the productName (banana) into ??
-        onBarCodeScanned(RetrieveFeedTask.productName);
-        Log.d("printies", "banana bitches");
+        productName = RetrieveFeedTask.productName;
+        onBarCodeScanned(productName);
+
+        TextView resultTextView = rootView.findViewById(R.id.resultText);
+        if (productName != null) {
+            resultTextView.setText(productName);
+            Log.d("printies", ""+productName);
+        }
         return rootView;
     }
 
