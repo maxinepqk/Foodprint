@@ -26,6 +26,9 @@
             android:windowSoftInputMode="stateAlwaysHidden">
 
         </activity>
+        
+        <activity android:name=".CalendarActivity"></activity>
+        
     </application>
 
 </manifest>
