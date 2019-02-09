@@ -1,11 +1,14 @@
 package com.example.foodprint;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 
 /**
@@ -23,6 +26,10 @@ public class CalendarFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     public static final String ARG_PAGE = "ARG_PAGE";
     private int mPage;
+
+
+    TextView thedate;
+    TextView btngocalendar;
 
 //    private OnFragmentInteractionListener mListener;
 
@@ -59,6 +66,22 @@ public class CalendarFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
 //        TextView textView = (TextView) view;
 //        textView.setText("Fragment #" + mPage);
+
+        // date and calendar view
+        thedate = (TextView) view.findViewById(R.id.date);
+        btngocalendar = (Button) view.findViewById(R.id.btngocalendar);
+
+        Intent incoming = getActivity().getIntent();
+        String date = incoming.getStringExtra("date");
+        thedate.setText(date);
+
+        btngocalendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),CalendarActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
