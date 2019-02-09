@@ -152,8 +152,8 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
 //        Log.d("response",response);
 
         //display produt name on scanner tab after scanning
-        TextView text = TextView.findViewById(R.id.resultText);
-        text.setText("you just scanned:\n"+productName);
+//        TextView text = (TextView)findViewById(R.id.resultText);
+//        text.setText("you just scanned:\n"+productName);
 
     }
 }
