@@ -158,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
             }
             Log.i("INFO", response);
             btnAddItem.setText("TESTING");
+            System.out.println("hello hello");
         }
     }
 
