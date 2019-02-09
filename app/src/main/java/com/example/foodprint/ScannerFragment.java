@@ -98,7 +98,8 @@ public class ScannerFragment extends Fragment {
         //call this whenever scanner is created, barcode API call
         RetrieveFeedTask barcodeLookup = new RetrieveFeedTask();
         barcodeLookup.execute();
-        onBarCodeScanned("banana");
+        //now try to store the productName (banana) into ??
+        onBarCodeScanned(RetrieveFeedTask.productName);
         Log.d("printies", "banana bitches");
         return rootView;
     }
