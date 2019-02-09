@@ -32,7 +32,7 @@ public class ScannerFragment extends Fragment {
     public static final String ARG_PAGE = "ARG_PAGE";
 
     public static String codeContent;
-    public String codeFormat;
+    public static String codeFormat;
 
     private OnFragmentInteractionListener mListener;
 
@@ -63,12 +63,18 @@ public class ScannerFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    private Exception exception;
+
 
     public void onActivityResult(int requestCode,int resultCode,Intent intent) {
         IntentResult scanResult =
                 IntentIntegrator.parseActivityResult(requestCode,resultCode,intent);
+        //get the info here
         codeContent = scanResult.getContents();
-        codeFormat = scanResult.getFormatName();
+        codeFormat= scanResult.getFormatName();
+        //try running retrievefeedback here for barcode API
+        RetrieveFeedTask testing = new RetrieveFeedTask();
+        testing.execute();
     }
 
     private void onBarCodeScanned(String foodName) {
@@ -88,6 +94,10 @@ public class ScannerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_scanner, container, false);
+
+        //call this whenever scanner is created, barcode API call
+        RetrieveFeedTask barcodeLookup = new RetrieveFeedTask();
+        barcodeLookup.execute();
         onBarCodeScanned("banana");
         Log.d("printies", "banana bitches");
         return rootView;

@@ -2,7 +2,10 @@ package com.example.foodprint;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.TextView;
+
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -11,6 +14,9 @@ import java.net.URL;
 import com.google.gson.Gson;
 
 class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
+
+    public static String barcode;
+    public static String productName;
 
     //copied from here from barcodelookup.com api documentation
     public class Product
@@ -68,29 +74,65 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
     protected String doInBackground(Void... urls) {
         String barcode = ScannerFragment.codeContent; //put the the barcode ID here
         // Do some validation here <== idk tf this means it came with the tutorial
-
         try {
+            //create URL to access API
             String API_URL = "https://api.barcodelookup.com/v2/products?";
-            String API_KEY = "mi3j1qnij304njrktnbxr5v4mlc3io"; // Yeonju's API key (u get 50 calls on free trial)
-            URL url = new URL(API_URL + "barcode=" + barcode + "&formatted=y" + "&key=" + API_KEY);
+//            String API_KEY = "mi3j1qnij304njrktnbxr5v4mlc3io"; // yeonjuk@andrew.cmu.edu API key (u get 50 calls on free trial)
+            String API_KEY = "rxrrloizrjppkg0mhxke78vr8qii0x"; //yeonjukim98@gmail.com API key
+            String URL_STRING = API_URL + "barcode=" + barcode + "&formatted=y&key=" + API_KEY;
+
+            //use static URL for debugging
+//            URL_STRING = "https://api.barcodelookup.com/v2/products?barcode=9780140157376&formatted=y&key=mi3j1qnij304njrktnbxr5v4mlc3io";
+//            URL_STRING = "https://api.barcodelookup.com/v2/products?barcode=9780140157376&formatted=y&key=rxrrloizrjppkg0mhxke78vr8qii0x";
+
+            URL url = new URL(URL_STRING);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+            //need these according to :https://stackoverflow.com/questions/40702774/httpurlconnection-getinputstream-stop-working
+            urlConnection.setRequestMethod("GET");
+            urlConnection.setReadTimeout(10000);
+            urlConnection.setDoInput(true);
+            int statusCode = urlConnection.getResponseCode();
+            urlConnection.connect();
+
+            //check if the url even works with status code
+            InputStream is = null;
+            if (statusCode >= 200 && statusCode < 400) {
+                // Create an InputStream in order to extract the response object
+                is = urlConnection.getInputStream();
+            }
+            else {
+                //status code is error!!
+                is = urlConnection.getErrorStream();
+            }
             try {
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-                StringBuilder stringBuilder = new StringBuilder();
-                String line;
-                while ((line = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(line).append("\n");
+                //get API info and parse into string
+                InputStreamReader i = new InputStreamReader(is); //this line didn't work
+
+                BufferedReader br = new BufferedReader(i);
+                String str = "";
+                String data = "";
+//                int count = 0;
+//                while (null != (str = br.readLine()) && (count < 10)) {
+                  while (null != (str = br.readLine())) {
+
+                        data += str + "\n";
+//                    count ++;
                 }
-                bufferedReader.close();
-                return stringBuilder.toString();
+//                br.close();
+                return data;
+            }
+            catch(Exception e){
+                //if you get an exception from the try above
+                return e.toString();
             }
             finally{
+                //if everything fails
                 urlConnection.disconnect();
             }
-        }
-        catch(Exception e) {
-            Log.e("ERROR", e.getMessage(), e);
-            return null;
+            }
+        catch(Exception e){
+            return "FucK OH NOOo";
         }
     }
 //    @Override
@@ -101,20 +143,17 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
         Log.i("INFO", response);
         // modified from barcodelookup api docs
         // use GSON to read JSON file
-//        Gson g = new Gson();
-//        RootObject value = g.fromJson(response, RootObject.class);
-//
-//        String barcode = value.products[0].barcode_number;
-//        System.out.print("Barcode Number: ");
-//        Log.d("barcode", barcode);
-//
-//        String name = value.products[0].product_name;
-//        System.out.print("Product Name: ");
-//        Log.d("name", name);
-//
+        Gson g = new Gson();
+        RootObject value = g.fromJson(response, RootObject.class);
+
+        barcode = value.products[0].barcode_number;
+        productName = value.products[0].product_name;
 //        System.out.println("Entire Response:");
-        Log.d("response",response);
-        //end of copied code
-        //make it actually do stuff instead
+//        Log.d("response",response);
+
+        //display produt name on scanner tab after scanning
+        TextView text = TextView.findViewById(R.id.resultText);
+        text.setText("you just scanned:\n"+productName);
+
     }
 }

@@ -1,11 +1,38 @@
 package com.example.foodprint;
 
+import android.Manifest;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.vision.CameraSource;
+import com.google.android.gms.vision.MultiDetector;
+import com.google.android.gms.vision.face.FaceDetector;
+import com.journeyapps.barcodescanner.CameraPreview;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 
 /**
@@ -20,10 +47,76 @@ public class CVFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     public static final String ARG_PAGE = "ARG_PAGE";
+    public static final String TAG = "PhotoViewerActivity";
 
-    // TODO: Rename and change types of parameters
+    private CameraSource mCameraSource = null;
+    //private CameraPreview mPreview;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        createCameraSource();
+
+    }
+
+    private void createCameraSource() {
+        // A multi-detector groups the two detectors together as one detector.  All images received
+        // by this detector from the camera will be sent to each of the underlying detectors, which
+        // will each do face and barcode detection, respectively.  The detection results from each
+        // are then sent to associated tracker instances which maintain per-item graphics on the
+        // screen.
+        FaceDetector faceDetector = new FaceDetector.Builder(getContext()).build();
+
+        MultiDetector multiDetector = new MultiDetector.Builder()
+                .add(faceDetector)
+                .build();
+
+        // Creates and starts the camera.  Note that this uses a higher resolution in comparison
+        // to other detection examples to enable the barcode detector to detect small barcodes
+        // at long distances.
+        mCameraSource = new CameraSource.Builder(getContext(),multiDetector)
+                .setFacing(CameraSource.CAMERA_FACING_BACK)
+                .setRequestedPreviewSize(1600, 1024)
+                .setRequestedFps(15.0f)
+                .build();
+    }
 
     private OnFragmentInteractionListener mListener;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if (mCameraSource != null) {
+            mCameraSource.release();
+        }
+    }
+
+    private void startCameraSource(LayoutInflater inflater, ViewGroup container,
+                                   Bundle savedInstanceState) {
+        int code = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(getContext());
+        if (code != ConnectionResult.SUCCESS) {
+            onDestroy();
+        }
+        if (mCameraSource != null) {
+            //mPreview.startViewTransition(getView());
+
+
+        }
+        else {
+            onDestroy();
+        }
+    }
 
     public CVFragment() {
         // Required empty public constructor
@@ -45,17 +138,22 @@ public class CVFragment extends Fragment {
         return fragment;
     }
 
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cv, container, false);
+
+        //mPreview = getView().findViewById(R.id.preview);
+        View rootView = inflater.inflate(R.layout.fragment_cv, container, false);
+        Button b = (Button)rootView.findViewById(R.id.cv_button);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+                startActivity(intent);
+            }
+        });
+        startCameraSource(inflater,container,savedInstanceState);
+        return rootView;
     }
 
 //    // TODO: Rename method, update argument and hook method into UI event
