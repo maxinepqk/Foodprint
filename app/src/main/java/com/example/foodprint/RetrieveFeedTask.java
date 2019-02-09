@@ -75,20 +75,20 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
             String API_KEY = "mi3j1qnij304njrktnbxr5v4mlc3io"; // Yeonju's API key (u get 50 calls on free trial)
             String URL_STRING = API_URL + "barcode=" + barcode + "&formatted=y&key=" + API_KEY;
             URL url = new URL(URL_STRING);
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            //HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
             //get API info and parse into string
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(url.openStream()));
             String str;
             String data = "";
-            while (null != (str= bufferedReader.readLine())) {
-                data+=str;
-            }
+//            while (null != (str= bufferedReader.readLine())) {
+//                data+=str;
+//            }
                 return data;
             }
         catch(Exception e){
-                Log.i("ERROR", e.getMessage());
-            return "FUCK";
+            Log.i("ERROR", e.getMessage());
+            return "FK OH NO";
         }
 
         /*
