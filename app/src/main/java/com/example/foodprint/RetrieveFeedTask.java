@@ -78,20 +78,34 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
 
             //use static URL for debugging
             URL_STRING = "https://api.barcodelookup.com/v2/products?barcode=9780140157376&formatted=y&key=mi3j1qnij304njrktnbxr5v4mlc3io";
+
             URL url = new URL(URL_STRING);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
-            //get API info and parse into string
-//            InputStreamReader i = new InputStreamReader(urlConnection.getInputStream());
+            //need these according to :https://stackoverflow.com/questions/40702774/httpurlconnection-getinputstream-stop-working
+            urlConnection.setRequestMethod("GET");
+            urlConnection.setReadTimeout(1000);
+            urlConnection.setDoInput(true);
+            int status = urlConnection.getResponseCode();
+            urlConnection.connect();
 
-//            BufferedReader br = new BufferedReader(i);
-            String str;
-            String data = "NOOT";
-//            while (null != (str= br.readLine())) {
-//                data+=str;
-//            }
+            try {
+                //get API info and parse into string
+//            InputStreamReader i = new InputStreamReader(urlConnection.getInputStream()); //this line didn't work
+                InputStreamReader i = new InputStreamReader(urlConnection.getErrorStream());
 
+                BufferedReader br = new BufferedReader(i);
+                String str;
+                String data = "";
+                while (null != (str = br.readLine())) {
+                    data += str;
+                }
+                br.close();
                 return data;
+            }
+            finally{
+                urlConnection.disconnect();
+            }
             }
         catch(Exception e){
             Log.i("ERROR", e.getMessage());

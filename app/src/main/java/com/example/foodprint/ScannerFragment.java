@@ -81,7 +81,6 @@ public class ScannerFragment extends Fragment {
         //call this whenever scanner is created, barcode API call
         RetrieveFeedTask barcodeLookup = new RetrieveFeedTask();
         barcodeLookup.execute();
-
         return rootView;
     }
 
