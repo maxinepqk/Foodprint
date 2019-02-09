@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
 //moved these two lines to samplefragmentpageradapter
-//        RetrieveFeedTask testing = new RetrieveFeedTask();
-//        testing.execute();
+        RetrieveFeedTask testing = new RetrieveFeedTask();
+        testing.execute();
     }
 
     @Override

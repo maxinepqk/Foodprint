@@ -62,13 +62,12 @@ public class ScannerFragment extends Fragment {
 
 
     public void onActivityResult(int requestCode,int resultCode,Intent intent) {
-        Log.d("", "ONACTIVITY RESULT");
         IntentResult scanResult =
                 IntentIntegrator.parseActivityResult(requestCode,resultCode,intent);
-
+        //get the info here
         codeContent = scanResult.getContents();
         codeFormat= scanResult.getFormatName();
-        Log.d("", codeContent);
+        //try running retrievefeedback here for barcode API
         RetrieveFeedTask testing = new RetrieveFeedTask();
         testing.execute();
     }
