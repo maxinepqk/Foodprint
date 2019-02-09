@@ -12,6 +12,11 @@ import android.view.ViewGroup;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,6 +77,18 @@ public class ScannerFragment extends Fragment {
         testing.execute();
     }
 
+    private void onBarCodeScanned(String foodName) {
+        int defaultExp = 0;
+        Calendar c = Calendar.getInstance();
+        Date currentDate = c.getTime();
+        c.add(Calendar.DATE, defaultExp);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        String strDate = dateFormat.format(currentDate);
+        MainActivity.setFoodItem(foodName, strDate);
+        Log.d("printies strDate date", strDate);
+        Log.d("printies strDate food", foodName);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -81,6 +98,9 @@ public class ScannerFragment extends Fragment {
         //call this whenever scanner is created, barcode API call
         RetrieveFeedTask barcodeLookup = new RetrieveFeedTask();
         barcodeLookup.execute();
+        //now try to store the productName (banana) into ??
+        onBarCodeScanned(RetrieveFeedTask.productName);
+        Log.d("printies", "banana bitches");
         return rootView;
     }
 
@@ -97,29 +117,8 @@ public class ScannerFragment extends Fragment {
     }
 
 
-//    // TODO: Rename method, update argument and hook method into UI event
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
-//
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
-//
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mListener = null;
-//    }
+
+
 
     /**
      * This interface must be implemented by activities that contain this
