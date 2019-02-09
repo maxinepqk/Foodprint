@@ -79,7 +79,7 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
 
             //use static URL for debugging
             URL_STRING = "https://api.barcodelookup.com/v2/products?barcode=9780140157376&formatted=y&key=mi3j1qnij304njrktnbxr5v4mlc3io";
-            URL_STRING = "https://api.barcodelookup.com/v2/products?barcode=9780140157376&formatted=y&key=mi3j1qnij304njrktnbxr5v4mlc3io";
+            URL_STRING = "https://api.barcodelookup.com/v2/products?barcode=9780140157376&formatted=y&key=rxrrloizrjppkg0mhxke78vr8qii0x";
 
             URL url = new URL(URL_STRING);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -104,7 +104,6 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
             try {
                 //get API info and parse into string
                 InputStreamReader i = new InputStreamReader(is); //this line didn't work
-//                InputStreamReader i = new InputStreamReader(urlConnection.getErrorStream());
 
                 BufferedReader br = new BufferedReader(i);
                 String str = "";
