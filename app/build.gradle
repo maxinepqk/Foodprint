@@ -48,5 +48,16 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     //need the below line for gson, to parse in JSON file
     implementation 'com.google.code.gson:gson:2.8.2' // Old 2.8.0
+    //Google Cloud Vision API dependencies
+    implementation 'com.google.android.gms:play-services-base:11.8.0'
+    implementation 'com.google.android.gms:play-services-auth:11.8.0'
+    implementation 'com.google.apis:google-api-services-vision:v1-rev16-1.22.0'
+    implementation ('com.google.api-client:google-api-client-android:1.22.0') {
+        exclude module: 'httpclient'
+    }
+    implementation ('com.google.http-client:google-http-client-gson:1.20.0') {
+        exclude module: 'httpclient'
+    }
+    implementation 'com.google.android.gms:play-services-vision:17.0.2'
 
 }
