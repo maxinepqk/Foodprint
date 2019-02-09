@@ -1,7 +1,6 @@
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
-import android.widget.ListView;
+
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
