@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,13 +58,19 @@ public class ScannerFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    private Exception exception;
+
 
     public void onActivityResult(int requestCode,int resultCode,Intent intent) {
         IntentResult scanResult =
                 IntentIntegrator.parseActivityResult(requestCode,resultCode,intent);
-        codeContent = scanResult.getContents();
-        codeFormat = scanResult.getFormatName();
-
+        String codeContent = scanResult.getContents();
+        String codeFormat= scanResult.getFormatName();
+        Log.d("", codeContent);
+        if(codeContent ==null) {
+            Log.e("", "NULL CODE CONTENT FROM SCANNERFRAGMENT",exception);
+        }
+        Log.e("", "ITWORKED");
     }
 
     @Override
