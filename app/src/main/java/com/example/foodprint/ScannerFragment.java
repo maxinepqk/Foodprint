@@ -58,7 +58,7 @@ public class ScannerFragment extends Fragment {
     }
 
 
-    public void  onActivityResult(int requestCode,int resultCode,Intent intent) {
+    public void onActivityResult(int requestCode,int resultCode,Intent intent) {
         IntentResult scanResult =
                 IntentIntegrator.parseActivityResult(requestCode,resultCode,intent);
         codeContent = scanResult.getContents();
