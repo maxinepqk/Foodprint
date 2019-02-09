@@ -28,9 +28,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
-    RetrieveFeedTask testing = new RetrieveFeedTask();
-//    testing.execute();
-//    new RetrieveFeedTask().execute();
 
     // declaring stateful objects here; these will be null before onCreate is called
     ArrayList<String> items;
@@ -66,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        RetrieveFeedTask testing = new RetrieveFeedTask();
+        testing.execute();
+//    new RetrieveFeedTask("").execute();
     }
 
 
