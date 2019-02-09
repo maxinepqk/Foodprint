@@ -16,8 +16,8 @@ public class CalendarActivity extends AppCompatActivity {
     private static final String TAG = "CalendarActivity";
     private CalendarView mCalendarView;
 
-    TextView thedate;
-    TextView btngocalendar;
+    //TextView thedate;
+    //TextView btngocalendar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class CalendarActivity extends AppCompatActivity {
         });
 
         // date and calendar view
-        thedate = (TextView) findViewById(R.id.date);
+        /*thedate = (TextView) findViewById(R.id.date);
         btngocalendar = (Button) findViewById(R.id.btngocalendar);
 
         Intent incoming = getIntent();
@@ -50,6 +50,6 @@ public class CalendarActivity extends AppCompatActivity {
                 Intent intent = new Intent(CalendarActivity.this,CalendarActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
     }
 }

@@ -35,13 +35,32 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> itemsAdapter;
     ListView lvItems;
 
+    TextView thedate;
+    TextView btngocalendar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // date and calendar view
+        thedate = findViewById(R.id.date);
+        btngocalendar = (Button) findViewById(R.id.btngocalendar);
+
+        Intent incoming = getIntent();
+        String date = incoming.getStringExtra("date");
+        thedate.setText(date);
+
+        btngocalendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,CalendarActivity.class);
+                startActivity(intent);
+            }
+        });
+
         // obtain a reference to the ListView created with the layout
-        lvItems = (ListView) findViewById(R.id.lvItems);
+        lvItems = findViewById(R.id.lvItems);
         // initialize the items list
         items = new ArrayList<>();
         // initialize the adapter using the items list
@@ -57,12 +76,12 @@ public class MainActivity extends AppCompatActivity {
         setupListViewListener();
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        ViewPager viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(new SampleFragmentPagerAdapter(getSupportFragmentManager(),
                 MainActivity.this));
 
         // Give the TabLayout the ViewPager
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        TabLayout tabLayout = findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
         RetrieveFeedTask testing = new RetrieveFeedTask();
@@ -88,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onAddItem(View v) {
         // obtain a reference to the EditText created with the layout
-        EditText etNewItem = (EditText) findViewById(R.id.etNewItem);
+        EditText etNewItem = findViewById(R.id.etNewItem);
         // grab the EditText's content as a String
         String itemText = etNewItem.getText().toString();
         // add the item to the list via the adapter
