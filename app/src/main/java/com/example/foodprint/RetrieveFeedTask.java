@@ -10,8 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 //need this to add gson
-//import com.google.gson.Gson;
-//import com.google.gson.GsonBuilder;
+import com.google.gson.Gson;
 
 class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
 
@@ -101,9 +100,22 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
             response = "THERE WAS AN ERROR";
         }
         Log.i("INFO", response);
+        // modified from barcodelookup api docs
         // use GSON to read JSON file
-//        Gson g = new Gson();
-//        RootObject value = g.fromJson(data, RootObject.class);
-//
+        Gson g = new Gson();
+        RootObject value = g.fromJson(response, RootObject.class);
+
+        String barcode = value.products[0].barcode_number;
+        System.out.print("Barcode Number: ");
+        System.out.println(barcode);
+
+        String name = value.products[0].product_name;
+        System.out.print("Product Name: ");
+        System.out.println(name);
+
+        System.out.println("Entire Response:");
+        System.out.println(response);
+        //end of copied code
+        //make it actually do stuff instead
     }
 }
