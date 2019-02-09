@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:fitsSystemWindows="true"-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-
-    tools:context=".MainActivity">
+    android:orientation="vertical">
 
     <android.support.design.widget.TabLayout
         android:id="@+id/sliding_tabs"
@@ -21,72 +25,77 @@
         android:layout_weight="1"
         android:background="@android:color/white" />
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"/>
+    <!--<include-->
+        <!--android:id="@+id/include"-->
+        <!--layout="@layout/content_main" />-->
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/content_main" />
+</LinearLayout>
 
-    <Button
-        android:id="@+id/btnAddItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add"
-        android:onClick="onAddItem"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="right|bottom" />
+    <!--<android.support.design.widget.AppBarLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:theme="@style/AppTheme.AppBarOverlay"/>-->
 
-    <ListView
-        android:id="@+id/lvItems"
-        android:layout_width="match_parent"
-        android:layout_height="490dp"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="left|center" />
 
-    <EditText
-        android:id="@+id/etNewItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Add a new item"
-        android:inputType="textPersonName"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="left|bottom" />
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="ganeshannt.calendarview.MainActivity">
 
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="0dp"
-            android:layout_height="86dp"
-            android:text="Date"
-            android:textAlignment="center"
-            android:textSize="45sp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.074" />
+    <!--<Button-->
+        <!--android:id="@+id/btnAddItem"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Add"-->
+        <!--android:onClick="onAddItem"-->
+        <!--app:layout_anchor="@+id/include"-->
+        <!--app:layout_anchorGravity="right|bottom" />-->
 
-        <Button
-            android:id="@+id/btngocalendar"
-            android:layout_width="266dp"
-            android:layout_height="47dp"
-            android:text="Go to calendar"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="61dp"
-            tools:layout_editor_absoluteY="1dp" />
+    <!--<ListView-->
+        <!--android:id="@+id/lvItems"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="490dp"-->
+        <!--app:layout_anchor="@+id/include"-->
+        <!--app:layout_anchorGravity="left|center" />-->
 
-    </android.support.constraint.ConstraintLayout>
+    <!--<EditText-->
+        <!--android:id="@+id/etNewItem"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:ems="10"-->
+        <!--android:hint="Add a new item"-->
+        <!--android:inputType="textPersonName"-->
+        <!--app:layout_anchor="@+id/include"-->
+        <!--app:layout_anchorGravity="left|bottom" />-->
 
-</android.support.design.widget.CoordinatorLayout>
+    <!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--xmlns:tools="http://schemas.android.com/tools"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--tools:context="ganeshannt.calendarview.MainActivity">-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/date"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="86dp"-->
+            <!--android:text="Date"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textSize="45sp"-->
+            <!--android:visibility="visible"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintHorizontal_bias="1.0"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:layout_constraintVertical_bias="0.074" />-->
+
+        <!--<Button-->
+            <!--android:id="@+id/btngocalendar"-->
+            <!--android:layout_width="266dp"-->
+            <!--android:layout_height="47dp"-->
+            <!--android:text="Go to calendar"-->
+            <!--tools:ignore="MissingConstraints"-->
+            <!--tools:layout_editor_absoluteX="16dp"-->
+            <!--tools:layout_editor_absoluteY="506dp" />-->
+
+    <!--</android.support.constraint.ConstraintLayout>-->
+
+<!--</android.support.design.widget.CoordinatorLayout>-->
