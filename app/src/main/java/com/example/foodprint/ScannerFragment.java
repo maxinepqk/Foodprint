@@ -63,7 +63,7 @@ public class ScannerFragment extends Fragment {
                 IntentIntegrator.parseActivityResult(requestCode,resultCode,intent);
         codeContent = scanResult.getContents();
         codeFormat = scanResult.getFormatName();
-        return codeContent
+        return codeContent;
     }
 
     @Override
