@@ -78,8 +78,8 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
             String URL_STRING = API_URL + "barcode=" + barcode + "&formatted=y&key=" + API_KEY;
 
             //use static URL for debugging
-            URL_STRING = "https://api.barcodelookup.com/v2/products?barcode=9780140157376&formatted=y&key=mi3j1qnij304njrktnbxr5v4mlc3io";
-            URL_STRING = "https://api.barcodelookup.com/v2/products?barcode=9780140157376&formatted=y&key=rxrrloizrjppkg0mhxke78vr8qii0x";
+//            URL_STRING = "https://api.barcodelookup.com/v2/products?barcode=9780140157376&formatted=y&key=mi3j1qnij304njrktnbxr5v4mlc3io";
+//            URL_STRING = "https://api.barcodelookup.com/v2/products?barcode=9780140157376&formatted=y&key=rxrrloizrjppkg0mhxke78vr8qii0x";
 
             URL url = new URL(URL_STRING);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -108,10 +108,12 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
                 BufferedReader br = new BufferedReader(i);
                 String str = "";
                 String data = "";
-                int count = 0;
-                while (null != (str = br.readLine()) && (count < 10)) {
-                    data += str + "\n";
-                    count ++;
+//                int count = 0;
+//                while (null != (str = br.readLine()) && (count < 10)) {
+                  while (null != (str = br.readLine())) {
+
+                        data += str + "\n";
+//                    count ++;
                 }
 //                br.close();
                 return data;
@@ -137,19 +139,19 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
         Log.i("INFO", response);
         // modified from barcodelookup api docs
         // use GSON to read JSON file
-//        Gson g = new Gson();
-//        RootObject value = g.fromJson(response, RootObject.class);
+        Gson g = new Gson();
+        RootObject value = g.fromJson(response, RootObject.class);
 //
-//        String barcode = value.products[0].barcode_number;
+        String barcode = value.products[0].barcode_number;
 //        System.out.print("Barcode Number: ");
 //        Log.d("barcode", barcode);
-//
-//        String name = value.products[0].product_name;
+
+        String name = value.products[0].product_name;
 //        System.out.print("Product Name: ");
 //        Log.d("name", name);
-//
+
 //        System.out.println("Entire Response:");
-        Log.d("response",response);
+//        Log.d("response",response);
 
     }
 }
