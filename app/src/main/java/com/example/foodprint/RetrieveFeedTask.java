@@ -106,14 +106,14 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
 
         String barcode = value.products[0].barcode_number;
         System.out.print("Barcode Number: ");
-        System.out.println(barcode);
+        Log.d("barcode", barcode);
 
         String name = value.products[0].product_name;
         System.out.print("Product Name: ");
-        System.out.println(name);
+        Log.d("name", name);
 
         System.out.println("Entire Response:");
-        System.out.println(response);
+        Log.d("response",response);
         //end of copied code
         //make it actually do stuff instead
     }
