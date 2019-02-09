@@ -1,5 +1,9 @@
 apply plugin: 'com.android.application'
 
+ext {
+    supportLibVersion = '28'  // variable that can be referenced to keep support libs consistent
+}
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -9,6 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -16,7 +21,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    dependencies {
+        implementation "com.android.support:appcompat-v7:${supportLibVersion}"
+        implementation "com.android.support:design:${supportLibVersion}"
+        implementation "com.android.support:recyclerview-v7:${supportLibVersion}"
+        implementation "com.android.support:support-vector-drawable:${supportLibVersion}" // VectorDrawableCompat
+        implementation "com.android.support:animated-vector-drawable:${supportLibVersion}" // AnimatedVectorDrawableCompat
+        implementation "com.android.support:transition:${supportLibVersion}"
+        implementation "com.android.support:support-annotations:${supportLibVersion}"
+    }
 }
+
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
