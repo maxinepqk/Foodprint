@@ -62,14 +62,16 @@ public class ScannerFragment extends Fragment {
 
 
     public void onActivityResult(int requestCode,int resultCode,Intent intent) {
+        Log.d("", "ONACTIVITY RESULT");
         IntentResult scanResult =
                 IntentIntegrator.parseActivityResult(requestCode,resultCode,intent);
+
         String codeContent = scanResult.getContents();
         String codeFormat= scanResult.getFormatName();
         Log.d("", codeContent);
-        if(codeContent ==null) {
-            Log.e("", "NULL CODE CONTENT FROM SCANNERFRAGMENT",exception);
-        }
+//        if(codeContent ==null) {
+//            Log.e("", "NULL CODE CONTENT FROM SCANNERFRAGMENT",exception);
+//        }
         Log.e("", "ITWORKED");
     }
 
