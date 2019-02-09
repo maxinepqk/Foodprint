@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,9 @@ public class CalendarFragment extends Fragment {
 
     TextView thedate;
     TextView btngocalendar;
+
+    private String foodItem;
+    private String date;
 
 //    private OnFragmentInteractionListener mListener;
 
@@ -64,16 +68,21 @@ public class CalendarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
-//        TextView textView = (TextView) view;
-//        textView.setText("Fragment #" + mPage);
 
         // date and calendar view
         thedate = (TextView) view.findViewById(R.id.date);
         btngocalendar = (Button) view.findViewById(R.id.btngocalendar);
 
         Intent incoming = getActivity().getIntent();
-        String date = incoming.getStringExtra("date");
-        thedate.setText(date);
+        date = incoming.getStringExtra("date");
+        if (date != null) {
+            thedate.setText(date);
+            Log.d("printies", "i set the fucking date");
+            foodItem = MainActivity.getFoodItem(date);
+            Log.d("printies CF food", ""+foodItem);
+        }
+
+        // Date operations
 
         btngocalendar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,31 +91,25 @@ public class CalendarFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        // Showing expiring food item
+        TextView foodItemView = view.findViewById(R.id.foodItemView);
+        foodItem = MainActivity.getFoodItem(date);
+        if (foodItem != null) foodItemView.setText(foodItem);
+
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
-//
 //    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        super.setUserVisibleHint(isVisibleToUser);
+//        if (isVisibleToUser) {
+//            if (date != null) {
+//                foodItem = MainActivity.getFoodItem(date);
+//                Log.d("printies CF date", ""+date);
 //
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mListener = null;
+//            }
+//        }
 //    }
 
     /**

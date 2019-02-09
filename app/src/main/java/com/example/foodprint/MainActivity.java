@@ -1,20 +1,19 @@
 package com.example.foodprint;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+
+import java.util.HashMap;
 
 //import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static HashMap<String, String> foodItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +30,10 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-//moved these two lines to scanner fragment
+        // Initialise foodItems
+        foodItems = new HashMap<String, String>();
+
+
 //        RetrieveFeedTask testing = new RetrieveFeedTask();
 //        testing.execute();
     }
@@ -56,6 +58,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    // Global foodItems get set functions
+    public static void setFoodItem(String foodName, String expDate) {
+        foodItems.put(expDate, foodName);
+        Log.d("printies", "i set food " + foodName + " to date " +expDate);
+    }
+
+    public static String getFoodItem(String expDate) {
+        String foodName = foodItems.get(expDate);
+        Log.d("printies", "i get food " + foodName + " from date " +expDate);
+        return foodName;
     }
 
 }
