@@ -34,29 +34,11 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> items;
     ArrayAdapter<String> itemsAdapter;
     ListView lvItems;
-    TextView thedate;
-    TextView btngocalendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // date and calendar
-        thedate = (TextView) findViewById(R.id.date);
-        btngocalendar = (Button) findViewById(R.id.btngocalendar);
-
-        Intent incoming = getIntent();
-        String date = incoming.getStringExtra("date");
-        thedate.setText(date);
-
-        btngocalendar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,CalendarActivity.class);
-                startActivity(intent);
-            }
-        });
 
         // obtain a reference to the ListView created with the layout
         lvItems = (ListView) findViewById(R.id.lvItems);
