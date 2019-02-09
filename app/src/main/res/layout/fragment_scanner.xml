@@ -1,20 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
     tools:context=".ScannerFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
+    <View
+        android:id="@+id/view2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="I AM SCANNER" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/scan_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/view2"
+        android:layout_alignBottom="@+id/view2"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="590dp"
+        android:layout_marginEnd="134dp"
+        android:layout_marginBottom="93dp"
+        android:baselineAligned="false"
+        android:gravity="center"
+        android:text="Add to My List"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="130dp"
+        android:layout_height="57dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="81dp"
+        android:layout_marginEnd="176dp"
+        android:text="Result Here" />
+
+</RelativeLayout>
