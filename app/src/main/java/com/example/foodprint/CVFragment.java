@@ -11,22 +11,21 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link CalendarFragment.OnFragmentInteractionListener} interface
+ * {@link CVFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link CalendarFragment#newInstance} factory method to
+ * Use the {@link CVFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CalendarFragment extends Fragment {
-
-
+public class CVFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     public static final String ARG_PAGE = "ARG_PAGE";
-    private int mPage;
 
-//    private OnFragmentInteractionListener mListener;
+    // TODO: Rename and change types of parameters
 
-    public CalendarFragment() {
+    private OnFragmentInteractionListener mListener;
+
+    public CVFragment() {
         // Required empty public constructor
     }
 
@@ -34,35 +33,32 @@ public class CalendarFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param page Parameter.
-     * @return A new instance of fragment Calendar.
+     * @param page
+     * @return A new instance of fragment CVFragment.
      */
     // TODO: Rename and change types and number of parameters
-
-    public static CalendarFragment newInstance(int page) {
+    public static CVFragment newInstance(int page) {
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, page);
-        CalendarFragment fragment = new CalendarFragment();
+        CVFragment fragment = new CVFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPage = getArguments().getInt(ARG_PAGE);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_calendar, container, false);
-//        TextView textView = (TextView) view;
-//        textView.setText("Fragment #" + mPage);
-        return view;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_cv, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+//    // TODO: Rename method, update argument and hook method into UI event
 //    public void onButtonPressed(Uri uri) {
 //        if (mListener != null) {
 //            mListener.onFragmentInteraction(uri);
@@ -100,6 +96,4 @@ public class CalendarFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
-    
 }
