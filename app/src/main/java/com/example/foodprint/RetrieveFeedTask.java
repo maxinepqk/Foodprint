@@ -78,12 +78,14 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
             //create URL to access API
             String API_URL = "https://api.barcodelookup.com/v2/products?";
 //            String API_KEY = "mi3j1qnij304njrktnbxr5v4mlc3io"; // yeonjuk@andrew.cmu.edu API key (u get 50 calls on free trial)
-            String API_KEY = "rxrrloizrjppkg0mhxke78vr8qii0x"; //yeonjukim98@gmail.com API key
+            // jane's
+
+            String API_KEY = "rim457mjr1ldji2j686uo6kclrclzz"; // rxrrloizrjppkg0mhxke78vr8qii0xyeonjukim98@gmail.com API key
             String URL_STRING = API_URL + "barcode=" + barcode + "&formatted=y&key=" + API_KEY;
 
             //use static URL for debugging
 //            URL_STRING = "https://api.barcodelookup.com/v2/products?barcode=9780140157376&formatted=y&key=mi3j1qnij304njrktnbxr5v4mlc3io";
-//            URL_STRING = "https://api.barcodelookup.com/v2/products?barcode=9780140157376&formatted=y&key=rxrrloizrjppkg0mhxke78vr8qii0x";
+//            URL_STRING = "https://api.barcodelookup.com/v2/products?barcode=034856121237&formatted=y&key=rim457mjr1ldji2j686uo6kclrclzz"; //fruit snacks
 
             URL url = new URL(URL_STRING);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -143,16 +145,17 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
         Log.i("INFO", response);
         // modified from barcodelookup api docs
         // use GSON to read JSON file
+        Log.d("", response);
         Gson g = new Gson();
         RootObject value = g.fromJson(response, RootObject.class);
 
 
-//        barcode = value.products[0].barcode_number;
-//        productName = value.products[0].product_name;
+        barcode = value.products[0].barcode_number;
+        productName = value.products[0].product_name;
 //        System.out.println("Entire Response:");
 //        Log.d("response",response);
 
-        //display produt name on scanner tab after scanning
+        //display product name on scanner tab after scanning
 //        TextView text = (TextView)findViewById(R.id.resultText);
 //        text.setText("you just scanned:\n"+productName);
 
