@@ -3,6 +3,7 @@ package com.example.foodprint;
 import android.os.AsyncTask;
 import android.util.Log;
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -74,16 +75,22 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
             String API_URL = "https://api.barcodelookup.com/v2/products?";
             String API_KEY = "mi3j1qnij304njrktnbxr5v4mlc3io"; // Yeonju's API key (u get 50 calls on free trial)
             String URL_STRING = API_URL + "barcode=" + barcode + "&formatted=y&key=" + API_KEY;
+
+            //use static URL for debugging
+            URL_STRING = "https://api.barcodelookup.com/v2/products?barcode=9780140157376&formatted=y&key=mi3j1qnij304njrktnbxr5v4mlc3io";
             URL url = new URL(URL_STRING);
-            //HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
             //get API info and parse into string
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(url.openStream()));
+//            InputStreamReader i = new InputStreamReader(urlConnection.getInputStream());
+
+//            BufferedReader br = new BufferedReader(i);
             String str;
-            String data = "";
-//            while (null != (str= bufferedReader.readLine())) {
+            String data = "NOOT";
+//            while (null != (str= br.readLine())) {
 //                data+=str;
 //            }
+
                 return data;
             }
         catch(Exception e){
