@@ -31,9 +31,9 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-//moved these two lines to samplefragmentpageradapter
-        RetrieveFeedTask testing = new RetrieveFeedTask();
-        testing.execute();
+//moved these two lines to scanner fragment
+//        RetrieveFeedTask testing = new RetrieveFeedTask();
+//        testing.execute();
     }
 
     @Override
