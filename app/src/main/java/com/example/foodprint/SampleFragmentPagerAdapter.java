@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 public class SampleFragmentPagerAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 4;
@@ -23,13 +24,7 @@ public class SampleFragmentPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0) return CalendarFragment.newInstance(position);
-        else if (position == 1) {
-            ScannerFragment s = ScannerFragment.newInstance(position);
-            RetrieveFeedTask testing = new RetrieveFeedTask();
-            testing.execute();
-            return s;
-
-        }
+        else if (position == 1) return ScannerFragment.newInstance(position);
         else if (position == 2) return CVFragment.newInstance(position);
         else return ListFragment.newInstance(position);
     }
