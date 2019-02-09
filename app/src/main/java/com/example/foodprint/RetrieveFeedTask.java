@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLStreamHandler;
 
 //need this to add gson
 import com.google.gson.Gson;
@@ -67,39 +68,41 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
 //    @Override
     protected String doInBackground(Void... urls) {
         String barcode = ScannerFragment.codeContent; //put the the barcode ID here
-//        Log.d("", ScannerFragment.codeContent);
         // Do some validation here <== idk tf this means it came with the tutorial
         if(barcode == null) {
             Log.e("ERROR", "BARCODE IS NULL", exception);
         }
-        return barcode;
-//        try {
-//            String API_URL = "https://api.barcodelookup.com/v2/products?";
-//            String API_KEY = "mi3j1qnij304njrktnbxr5v4mlc3io"; // Yeonju's API key (u get 50 calls on free trial)
-//            URL url = new URL(API_URL + "barcode=" + barcode + "&formatted=y" + "&key=" + API_KEY);
-//            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-//            try {
-//                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-//                StringBuilder stringBuilder = new StringBuilder();
-//                String line;
-//                while ((line = bufferedReader.readLine()) != null) {
-//                    stringBuilder.append(line).append("\n");
-//                }
-//                bufferedReader.close();
-//                return stringBuilder.toString();
-//            }
-//            finally{
-//                urlConnection.disconnect();
-//            }
-//        }
-//        catch(Exception e) {
-//            Log.e("ERROR", e.getMessage(), e);
-//            return null;
-//        }
+        try {
+            String API_URL = "https://api.barcodelookup.com/v2/products?";
+            String API_KEY = "mi3j1qnij304njrktnbxr5v4mlc3io"; // Yeonju's API key (u get 50 calls on free trial)
+            String URL_STRING = API_URL + "barcode=" + barcode + "&formatted=y" + "&key=" + API_KEY;
+            return URL_STRING;
+            URL url = new URL(URL_STRING);
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            try {
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line).append("\n");
+                }
+                bufferedReader.close();
+                Log.d("", stringBuilder.toString());
+                return stringBuilder.toString();
+            }
+            finally{
+                urlConnection.disconnect();
+            }
+        }
+        catch(Exception e) {
+            Log.e("ERROR", e.getMessage(), e);
+            return null;
+        }
     }
 //    @Override
     protected void onPostExecute(String response) {
         if(response == null) {
+
             response = "THERE WAS AN ERROR";
         }
         Log.i("INFO", response);
