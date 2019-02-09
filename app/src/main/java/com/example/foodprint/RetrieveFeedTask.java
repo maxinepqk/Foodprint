@@ -60,12 +60,13 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
     }
 
     private Exception exception;
-    Button btnAddItem;
+//    Button btnAddItem;
 
+//    @Override
     protected void onPreExecute() {
         //do some stuff here
     }
-
+//    @Override
     protected String doInBackground(Void... urls) {
         String barcode = "9780140157376"; //put the the barcode ID here
         // Do some validation here <== idk tf this means it came with the tutorial
@@ -94,7 +95,7 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
             return null;
         }
     }
-
+//    @Override
     protected void onPostExecute(String response) {
         if(response == null) {
             response = "THERE WAS AN ERROR";

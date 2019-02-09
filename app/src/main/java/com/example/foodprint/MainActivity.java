@@ -12,11 +12,14 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.Button;
+//import android.widget.Button;
+
 
 import java.util.ArrayList;
 
 import android.os.AsyncTask;
+
+
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -25,6 +28,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
+    RetrieveFeedTask testing = new RetrieveFeedTask();
+//    testing.execute();
+//    new RetrieveFeedTask().execute();
 
     // declaring stateful objects here; these will be null before onCreate is called
     ArrayList<String> items;
