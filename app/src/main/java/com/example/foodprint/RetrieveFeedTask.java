@@ -2,12 +2,13 @@ package com.example.foodprint;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.TextView;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLStreamHandler;
 
 //need this to add gson
 import com.google.gson.Gson;
@@ -144,17 +145,15 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
         // use GSON to read JSON file
         Gson g = new Gson();
         RootObject value = g.fromJson(response, RootObject.class);
-//
+
         barcode = value.products[0].barcode_number;
-//        System.out.print("Barcode Number: ");
-//        Log.d("barcode", barcode);
-
         productName = value.products[0].product_name;
-//        System.out.print("Product Name: ");
-        Log.d("productName", productName);
-
 //        System.out.println("Entire Response:");
 //        Log.d("response",response);
+
+        //display produt name on scanner tab after scanning
+        TextView text = TextView.findViewById(R.id.resultText);
+        text.setText("you just scanned:\n"+productName);
 
     }
 }
