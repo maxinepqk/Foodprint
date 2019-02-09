@@ -73,10 +73,12 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
         try {
             //create URL to access API
             String API_URL = "https://api.barcodelookup.com/v2/products?";
-            String API_KEY = "mi3j1qnij304njrktnbxr5v4mlc3io"; // Yeonju's API key (u get 50 calls on free trial)
+//            String API_KEY = "mi3j1qnij304njrktnbxr5v4mlc3io"; // yeonjuk@andrew.cmu.edu API key (u get 50 calls on free trial)
+            String API_KEY = "rxrrloizrjppkg0mhxke78vr8qii0x"; //yeonjukim98@gmail.com API key
             String URL_STRING = API_URL + "barcode=" + barcode + "&formatted=y&key=" + API_KEY;
 
             //use static URL for debugging
+            URL_STRING = "https://api.barcodelookup.com/v2/products?barcode=9780140157376&formatted=y&key=mi3j1qnij304njrktnbxr5v4mlc3io";
             URL_STRING = "https://api.barcodelookup.com/v2/products?barcode=9780140157376&formatted=y&key=mi3j1qnij304njrktnbxr5v4mlc3io";
 
             URL url = new URL(URL_STRING);
@@ -84,67 +86,49 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
 
             //need these according to :https://stackoverflow.com/questions/40702774/httpurlconnection-getinputstream-stop-working
             urlConnection.setRequestMethod("GET");
-            urlConnection.setReadTimeout(1000);
+            urlConnection.setReadTimeout(10000);
             urlConnection.setDoInput(true);
-            int status = urlConnection.getResponseCode();
+            int statusCode = urlConnection.getResponseCode();
             urlConnection.connect();
 
+            //check if the url even works with status code
+            InputStream is = null;
+            if (statusCode >= 200 && statusCode < 400) {
+                // Create an InputStream in order to extract the response object
+                is = urlConnection.getInputStream();
+            }
+            else {
+                //status code is error!!
+                is = urlConnection.getErrorStream();
+            }
             try {
                 //get API info and parse into string
-//            InputStreamReader i = new InputStreamReader(urlConnection.getInputStream()); //this line didn't work
-                InputStreamReader i = new InputStreamReader(urlConnection.getErrorStream());
+                InputStreamReader i = new InputStreamReader(is); //this line didn't work
+//                InputStreamReader i = new InputStreamReader(urlConnection.getErrorStream());
 
                 BufferedReader br = new BufferedReader(i);
-                String str;
+                String str = "";
                 String data = "";
-                while (null != (str = br.readLine())) {
-                    data += str;
+                int count = 0;
+                while (null != (str = br.readLine()) && (count < 10)) {
+                    data += str + "\n";
+                    count ++;
                 }
-                br.close();
+//                br.close();
                 return data;
             }
+            catch(Exception e){
+                //if you get an exception from the try above
+                return e.toString();
+            }
             finally{
+                //if everything fails
                 urlConnection.disconnect();
             }
             }
         catch(Exception e){
-            Log.i("ERROR", e.getMessage());
-            return "FK OH NO";
+            return "FucK OH NOOo";
         }
-
-        /*
-        try {
-            String API_URL = "https://api.barcodelookup.com/v2/products?";
-            String API_KEY = "mi3j1qnij304njrktnbxr5v4mlc3io"; // Yeonju's API key (u get 50 calls on free trial)
-            String URL_STRING = API_URL + "barcode=" + barcode + "&formatted=y&key=" + API_KEY;
-            URL url = new URL(URL_STRING);
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-
-            try {
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-                String str;
-                String data = "";
-                while (null != (str= bufferedReader.readLine())) {
-                    data+=str;
-                }
-                return data;
-//                StringBuilder stringBuilder = new StringBuilder();
-//                String line;
-//                while ((line = bufferedReader.readLine()) != null) {
-//                    stringBuilder.append(line).append("\n");
-//                }
-//                bufferedReader.close();
-//                return stringBuilder.toString();
-            }
-            finally{
-                urlConnection.disconnect();
-            }
-        }
-        catch(Exception e) {
-            Log.i("ERROR", e.getMessage());
-            return null;
-        }
-        */
     }
 //    @Override
     protected void onPostExecute(String response) {
@@ -167,7 +151,6 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
 //
 //        System.out.println("Entire Response:");
         Log.d("response",response);
-        //end of copied code
-        //make it actually do stuff instead
+
     }
 }
