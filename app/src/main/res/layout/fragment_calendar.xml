@@ -9,5 +9,38 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center" />
+    
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="foodprint.calendarview.MainActivity">
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="0dp"
+            android:layout_height="86dp"
+            android:text="Date"
+            android:textAlignment="center"
+            android:textSize="45sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.074" />
+
+        <Button
+            android:id="@+id/btngocalendar"
+            android:layout_width="266dp"
+            android:layout_height="47dp"
+            android:text="Go to calendar"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="72dp"
+            tools:layout_editor_absoluteY="1dp" />
+
+    </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>
