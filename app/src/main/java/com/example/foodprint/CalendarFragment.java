@@ -100,4 +100,29 @@ public class CalendarFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+    
+    public class CalendarActivity extends AppCompatActivity {
+
+        private static final String TAG = "CalendarActivity";
+        private CalendarView mCalendarView;
+
+        @Override
+        protected void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.calendar_layout);
+            mCalendarView = (CalendarView) findViewById(R.id.calendarView);
+            mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+                @Override
+                public void onSelectedDayChange(CalendarView CalendarView, int year, int month, int dayOfMonth) {
+                    String date = year + "/" + month + "/" + dayOfMonth;
+                    Log.d(TAG, "onSelectedDayChange: yyyy/mm/dd:" + date);
+                    Intent intent = new Intent(CalendarActivity.this, MainActivity.class);
+                    intent.putExtra("date", date);
+                    startActivity(intent);
+
+                }
+            });
+        }
+    }
+    
 }

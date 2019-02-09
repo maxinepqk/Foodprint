@@ -2,8 +2,6 @@ package com.example.foodprint;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Button;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -68,7 +66,7 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
     }
 //    @Override
     protected String doInBackground(Void... urls) {
-        String barcode = "9780140157376"; //put the the barcode ID here
+        String barcode = ScannerFragment.codeContent; //put the the barcode ID here
         // Do some validation here <== idk tf this means it came with the tutorial
 
         try {

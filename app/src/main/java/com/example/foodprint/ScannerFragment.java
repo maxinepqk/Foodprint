@@ -25,7 +25,7 @@ public class ScannerFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     public static final String ARG_PAGE = "ARG_PAGE";
 
-    public String codeContent;
+    public static String codeContent;
     public String codeFormat;
 
     private OnFragmentInteractionListener mListener;
