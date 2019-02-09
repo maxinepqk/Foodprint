@@ -27,6 +27,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.MultiDetector;
+import com.google.android.gms.vision.face.FaceDetector;
 import com.journeyapps.barcodescanner.CameraPreview;
 
 import java.io.IOException;
@@ -48,11 +49,12 @@ public class CVFragment extends Fragment {
     public static final String TAG = "PhotoViewerActivity";
 
     private CameraSource mCameraSource = null;
-    private CameraPreview mPreview;
+    //private CameraPreview mPreview;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        startCameraSource();
         createCameraSource();
 
     }
@@ -63,7 +65,10 @@ public class CVFragment extends Fragment {
         // will each do face and barcode detection, respectively.  The detection results from each
         // are then sent to associated tracker instances which maintain per-item graphics on the
         // screen.
+        FaceDetector faceDetector = new FaceDetector.Builder(getContext()).build();
+
         MultiDetector multiDetector = new MultiDetector.Builder()
+                .add(faceDetector)
                 .build();
 
         // Creates and starts the camera.  Note that this uses a higher resolution in comparison
@@ -103,7 +108,7 @@ public class CVFragment extends Fragment {
             onDestroy();
         }
         if (mCameraSource != null) {
-            mPreview.startViewTransition(getView());
+            //mPreview.startViewTransition(getView());
         }
     }
 
@@ -131,7 +136,7 @@ public class CVFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mPreview = getView().findViewById(R.id.preview);
+        //mPreview = getView().findViewById(R.id.preview);
         return inflater.inflate(R.layout.fragment_cv, container, false);
     }
 
