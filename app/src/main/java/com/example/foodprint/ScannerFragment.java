@@ -1,12 +1,20 @@
 package com.example.foodprint;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.support.design.widget.FloatingActionButton;
+import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
+import org.w3c.dom.Text;
 
 
 /**
@@ -21,10 +29,12 @@ public class ScannerFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     public static final String ARG_PAGE = "ARG_PAGE";
-    private int mPage;
 
+    public String codeContent;
+    public String codeFormat;
 
     private OnFragmentInteractionListener mListener;
+
 
     public ScannerFragment() {
         // Required empty public constructor
@@ -50,18 +60,25 @@ public class ScannerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPage = getArguments().getInt(ARG_PAGE);
+        IntentIntegrator integrator =
+                new IntentIntegrator(this.getActivity()).forSupportFragment(this);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+        integrator.setCameraId(0);
+        integrator.initiateScan();
+    }
+
+    public void onActivityResult(int requestCode,int resultCode,Intent intent) {
+        IntentResult scanResult =
+                IntentIntegrator.parseActivityResult(requestCode,resultCode,intent);
+        codeContent = scanResult.getContents();
+        codeFormat = scanResult.getFormatName();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_scanner, container, false);
-        TextView textView = (TextView) view;
-        textView.setText("Fragment #" + mPage);
-        return view;
-
+        return inflater.inflate(R.layout.fragment_scanner, container, false);
     }
 
 //    // TODO: Rename method, update argument and hook method into UI event

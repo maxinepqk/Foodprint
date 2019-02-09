@@ -46,4 +46,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //need the below line for gson, to parse in JSON file
+    implementation 'com.google.code.gson:gson:2.8.2' // Old 2.8.0
+
 }
