@@ -85,8 +85,8 @@ public class ScannerFragment extends Fragment {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         String strDate = dateFormat.format(currentDate);
         MainActivity.setFoodItem(foodName, strDate);
-        Log.d("printies strDate date", strDate);
-        Log.d("printies strDate food", foodName);
+        Log.d("printies strDate date", ""+strDate);
+        Log.d("printies strDate food", ""+foodName);
     }
 
     @Override

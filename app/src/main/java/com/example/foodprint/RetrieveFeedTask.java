@@ -146,8 +146,9 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
         Gson g = new Gson();
         RootObject value = g.fromJson(response, RootObject.class);
 
-        barcode = value.products[0].barcode_number;
-        productName = value.products[0].product_name;
+
+//        barcode = value.products[0].barcode_number;
+//        productName = value.products[0].product_name;
 //        System.out.println("Entire Response:");
 //        Log.d("response",response);
 
